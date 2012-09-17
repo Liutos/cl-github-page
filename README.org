@@ -1,5 +1,0 @@
-* cl-github-page - Static Blog Generator
-** Introduction
-Cl-github-page is a static blog generator written by Common Lisp. It was created for simplifying the management of my blog built on the GitHub Pages. It just handles the generation of target files(.html files) and the update of the whole site. The user can classify the posts into different categories and categories can be nesting.
-** Author
-Liutos(mat.liutos@gmail.com)
