@@ -8,7 +8,9 @@
 (defsystem :cl-github-page
   :author "Liutos <mat.liutos@gmail.com>"
   :depends-on (:cl-fad :cl-markdown :cl-who :html-template :local-time)
-  :components ((:file "blog"
+  :components ((:file "about-me"
+                      :depends-on ("package"))
+               (:file "blog"
 		      :depends-on ("package"))
 	       (:file "category"
 		      :depends-on ("class" "package"))
