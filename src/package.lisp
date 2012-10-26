@@ -1,4 +1,6 @@
 (defpackage :com.liutos.cl-github-page
+  (:nicknames :cl-github-page
+              :clgp)
   (:use :cl
 	:cl-github-page.file-comp
 	:cl-github-page.path)
@@ -33,11 +35,15 @@
 (defblog-file *rss* "atom.xml")
 (defblog-file *index* "index.html")
 (defblog-file *friends-page* "friends.html")
+(defblog-file *about-me-src* "about-me.text")
+(defblog-file *about-me* "about-me.html")
+(defblog-file *tags* "tags.lisp")
 
 (defparameter *post-tmpl* #p"post.tmpl")
 (defparameter *rss-tmpl* #p"atom.tmpl")
 (defparameter *index-tmpl* #p"index.tmpl")
 (defparameter *friends-tmpl* #p"friends.tmpl")
+(defparameter *about-me-tmpl* #p"about-me.tmpl")
 
 (defmacro with-cache (var val)
   `(or ,var
