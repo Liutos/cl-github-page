@@ -7,6 +7,7 @@
 
 (defsystem :cl-github-page
   :author "Liutos <mat.liutos@gmail.com>"
+  :version "0.0.1"
   :depends-on (:cl-fad :cl-markdown :cl-who :html-template :local-time)
   :components ((:file "about-me"
                       :depends-on ("package"))
