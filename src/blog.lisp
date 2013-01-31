@@ -1,15 +1,13 @@
-(in-package :com.liutos.cl-github-page)
+(in-package :cl-github-page)
 
 (defvar *blog-title* nil)
 
 (defun make-blog-title ()
   (with-cache *blog-title*
-    (with-html-output-to-string (s)
-      (:h1 "Liutos的博客 - "
-	   (:small "乍听之下，不无道理；仔细揣摩，胡说八道(￣ε(#￣)"))
-      (:h3 "Powered By "
-	   (:a :href "http://github.com/Liutos/cl-github-page"
-	       "cl-github-page")))))
+    (with-output-to-string (s)
+      (let ((*default-template-pathname* (merge-pathnames "tmpl/" *blog-dir*)))
+        (fill-and-print-template
+         *blog-title-tmpl* nil :stream s)))))
 
 (defvar *friends-cache* nil)
 
@@ -17,7 +15,8 @@
   (with-cache *friends-cache*
     (with-open-file (s *friends*)
       (let ((lns (read s)))
-	(loop :for (link . name) :in lns
+	(loop
+           :for (link . name) :in lns
 	   :collect (list :link link :name name))))))
 
 (defun make-friends-page ()

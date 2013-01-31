@@ -20,19 +20,20 @@
 		:universal-to-timestamp)
   (:export :main))
 
-(in-package :com.liutos.cl-github-page)
+(in-package :cl-github-page)
 
 (defparameter *blog-dir*
   (namestring (merge-pathnames "src/blog/" (user-homedir-pathname))))
 
 (defmacro defblog-file (var filespec &optional doc)
   `(defparameter ,var
-     (concatenate 'string *blog-dir* ,filespec) ,doc))
+     (concatenate 'string *blog-dir* ,filespec)
+     ,@(and doc (list doc))))
 
 (defblog-file *sources-dir* "src/")
 (defblog-file *posts-dir* "posts/")
 (defblog-file *friends* "friends.lisp")
-(defblog-file *rss* "atom.xml")
+(defblog-file *atom* "atom.xml")
 (defblog-file *index* "index.html")
 (defblog-file *friends-page* "friends.html")
 (defblog-file *about-me-src* "about-me.text")
@@ -40,10 +41,11 @@
 (defblog-file *tags* "tags.lisp")
 
 (defparameter *post-tmpl* #p"post.tmpl")
-(defparameter *rss-tmpl* #p"atom.tmpl")
+(defparameter *atom-tmpl* #p"atom.tmpl")
 (defparameter *index-tmpl* #p"index.tmpl")
 (defparameter *friends-tmpl* #p"friends.tmpl")
 (defparameter *about-me-tmpl* #p"about-me.tmpl")
+(defparameter *blog-title-tmpl* #p"title.tmpl")
 
 (defmacro with-cache (var val)
   `(or ,var

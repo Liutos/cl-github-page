@@ -1,25 +1,34 @@
-(in-package :com.liutos.cl-github-page)
+(in-package :cl-github-page)
 
 (defclass post ()
   ((title
     :initarg :title
-    :reader post-title)
+    :reader post-title
+    :documentation "The name of a .text file"
+    :type string)
    (content
     :initarg :content
-    :reader post-content)
+    :reader post-content
+    :documentation "The HTML converted from Markdown text."
+    :type string)
    (date
     :initarg :date
-    :reader post-date)
+    :reader post-date
+    :type string)
    (src-date
     :initarg :src-date
-    :reader post-src-date)
+    :reader post-src-date
+    ;; :type local-time:timestamp
+    :type integer)
    (link
     :accessor post-link
     :accessor post-url
-    :accessor post-id)
+    :accessor post-id
+    :type string)
    (rss-date
     :initarg :rss-date
-    :reader post-rss-date)
+    :reader post-rss-date
+    :type string)
    (path
     :initarg :path
     :reader post-path)

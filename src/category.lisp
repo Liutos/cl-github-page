@@ -1,4 +1,4 @@
-(in-package :com.liutos.cl-github-page)
+(in-package :cl-github-page)
 
 (defparameter *categories*
   (make-hash-table :test #'equal))
@@ -29,13 +29,17 @@
       (push post (gethash cat *categories*)))))
 
 (defun make-categories-list ()
-  (loop :for cat :being :the :hash-keys :of *categories*
-     :using (hash-value articles)
-     :collect (list
-	       :category cat
-	       :category-name cat
-	       :articles (mapcar #'(lambda (p)
-				     (list
-				      :post-link (concatenate 'string "/" (post-link p))
-				      :post-title (post-title p)))
-				 articles))))
+  (let (cats)
+    (maphash #'(lambda (cat articles)
+                 (push
+                  (list
+                   :category cat
+                   :category-name cat
+                   :articles (mapcar #'(lambda (p)
+                                         (list
+                                          :post-link (concatenate 'string "/" (post-link p))
+                                          :post-title (post-title p)))
+                                     articles))
+                  cats))
+             *categories*)
+    cats))
