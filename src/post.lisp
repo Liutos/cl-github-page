@@ -1,4 +1,4 @@
-(in-package :com.liutos.cl-github-page)
+(in-package :cl-github-page)
 
 (defun markdown-to-html (filespec)
   (with-output-to-string (s)
@@ -21,6 +21,8 @@
   (format-rfc1123-timestring nil (universal-to-timestamp (file-write-date src))))
 
 (defun make-post (src)
+  "Create a post from the file located in `src'."
+  (assert (typep src 'pathname))
   (make-instance 'post
 		 :title (pathname-name src)
 		 :content (markdown-to-html src)
@@ -39,12 +41,12 @@
   (timestamp> (post-src-date p1) (post-src-date p2)))
 
 (defun get-all-posts ()
-  (let (srcs)
+  (let ((srcs (make-array 50 :fill-pointer 0)))
     (walk-directory *sources-dir*
 		    #'(lambda (s)
 			(let ((post (make-post s)))
 			  (record-category post)
-			  (push post srcs))))
+			  (vector-push post srcs))))
     (sort srcs #'post-date>)))
 
 (defun post-datum (post)
@@ -63,8 +65,9 @@
 			  *post-tmpl*
 			  (post-datum post)))))
 
-(defun update-all-posts (posts-list &optional (forced-p nil))
-  (dolist (post posts-list)
-    (when (or forced-p (post-updatable-p post))
-      (write-post post)
-      (format t "~&Source file ~A updated!~%" (post-source-path post)))))
+(defun update-all-posts (posts &optional (forced-p nil))
+  (dotimes (i (length posts))
+    (let ((post (aref posts i)))
+      (when (or forced-p (post-updatable-p post))
+        (write-post post)
+        (format t "~&Source file ~A updated!~%" (post-source-path post))))))
