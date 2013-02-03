@@ -17,7 +17,7 @@
       (let ((lns (read s)))
 	(loop
            :for (link . name) :in lns
-	   :collect (list :link link :name name))))))
+           :collect (list :link link :name name))))))
 
 (defun make-friends-page ()
   (let ((datum (list :friends (make-friends-list))))

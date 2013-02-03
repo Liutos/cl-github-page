@@ -14,5 +14,5 @@
 
 (defun write-rss (posts-list)
   (write-file-by-tmpl *atom*
-		      *atom-tmpl*
-		      (list :post-entries (rss/posts-datum posts-list))))
+                      *atom-tmpl*
+                      (list :post-entries (rss/posts-datum posts-list))))
