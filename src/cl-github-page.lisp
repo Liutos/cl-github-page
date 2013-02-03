@@ -4,6 +4,6 @@
   (clrhash *categories*)
   (let ((srcs (get-all-posts)))
     (update-all-posts srcs forced-p)
-    (write-rss srcs)
+    ;; (write-rss srcs)
     (write-about-me)
     (write-index srcs)))

@@ -1,7 +1,7 @@
 (in-package :com.liutos.cl-github-page)
 
 (defun make-post-infos (posts)
-  (assert (typep posts 'array))
+  ;; (assert (typep posts 'array))
   (loop
      :for post :being :the :elements :of posts
      :collect (list

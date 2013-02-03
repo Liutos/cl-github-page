@@ -18,8 +18,9 @@
    (src-date
     :initarg :src-date
     :reader post-src-date
-    ;; :type local-time:timestamp
-    :type integer)
+    :type local-time:timestamp
+    ;; :type integer
+    )
    (link
     :accessor post-link
     :accessor post-url

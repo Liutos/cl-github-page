@@ -1,8 +1,8 @@
 (in-package :cl-github-page)
 
 (defun rss/posts-datum (posts)
-  (assert (typep posts 'array))
-  (map 'array
+  ;; (assert (typep posts 'array))
+  (map 'list
        #'(lambda (post)
            (list
             :post-title (post-title post)

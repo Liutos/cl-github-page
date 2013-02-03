@@ -38,8 +38,9 @@
 	(file-mtime> source-path path))))
 
 (defun post-date> (p1 p2)
-  ;; (timestamp> (post-src-date p1) (post-src-date p2))
-  (> (post-src-date p1) (post-src-date p2)))
+  (timestamp> (post-src-date p1) (post-src-date p2))
+  ;; (> (post-src-date p1) (post-src-date p2))
+  )
 
 (defun get-all-posts ()
   (let ((srcs (make-array 50 :fill-pointer 0)))
@@ -67,7 +68,7 @@
 			  (post-datum post)))))
 
 (defun update-all-posts (posts &optional (forced-p nil))
-  (assert (typep posts 'array))
+  ;; (assert (typep posts 'array))
   (dotimes (i (length posts))
     (let ((post (aref posts i)))
       (when (or forced-p (post-updatable-p post))
