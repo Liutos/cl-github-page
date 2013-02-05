@@ -1,4 +1,4 @@
-(in-package :cl-github-page)
+(in-package :akashic)
 
 (defun markdown-to-html (filespec)
   (with-output-to-string (s)
@@ -30,26 +30,27 @@
 		 :rss-date (rss/post-date-string src)
 		 :path (gen-post-path src)
 		 :source-path src
-		 :src-date (universal-to-timestamp (file-write-date src))))
+		 ;; :src-date (universal-to-timestamp (file-write-date src))
+                 :src-date (file-write-date src)))
 
 (defun post-updatable-p (post)
   (with-slots (source-path path) post
     (or (not (probe-file path))
-	(file-mtime> source-path path))))
+	(last-modified> source-path path))))
 
-(defun post-date> (p1 p2)
-  (timestamp> (post-src-date p1) (post-src-date p2))
-  ;; (> (post-src-date p1) (post-src-date p2))
-  )
+(defun post-datetime> (post-a post-b)
+  ;; (timestamp> (post-src-date p1) (post-src-date p2))
+  (> (post-src-date post-a) (post-src-date post-b)))
 
-(defun get-all-posts ()
-  (let ((srcs (make-array 50 :fill-pointer 0)))
-    (walk-directory *sources-dir*
+(defun get-all-sources (&optional (source-dir *sources-dir*))
+  "Walks through the directory `*sources-dir*` recursively, makes an instance of class POST for each .text file, collects them into a list, sorts the elements in the list and returns it."
+  (let (srcs)
+    (walk-directory source-dir
 		    #'(lambda (s)
 			(let ((post (make-post s)))
 			  (record-category post)
-			  (vector-push post srcs))))
-    (sort srcs #'post-date>)))
+			  (push post srcs))))
+    (sort srcs #'post-datetime>)))
 
 (defun post-datum (post)
   (list
@@ -68,9 +69,7 @@
 			  (post-datum post)))))
 
 (defun update-all-posts (posts &optional (forced-p nil))
-  ;; (assert (typep posts 'array))
-  (dotimes (i (length posts))
-    (let ((post (aref posts i)))
-      (when (or forced-p (post-updatable-p post))
-        (write-post post)
-        (format t "~&Source file ~A updated!~%" (post-source-path post))))))
+  (dolist (post posts)
+    (when (or forced-p (post-updatable-p post))
+      (write-post post)
+      (format t "~&Source file ~A updated!~%" (post-source-path post)))))

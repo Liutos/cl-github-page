@@ -2,9 +2,9 @@
 
 (defun main (&optional (forced-p nil))
   (clrhash *categories*)
-  (let ((srcs (get-all-posts)))
+  (let ((srcs (get-all-sources)))
     (update-all-posts srcs forced-p)
-    ;; (write-rss srcs)
+    (write-rss srcs)
     (write-about-me)
     (write-index srcs)))
 

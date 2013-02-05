@@ -4,16 +4,16 @@
   (:import-from :local-time
 		:timestamp>
 		:universal-to-timestamp)
-  (:export :file-mtime>
-	   :file-date-string))
+  (:export #:last-modified>
+	   #:file-date-string))
 
 (in-package :cl-github-page.file-comp)
 
-(defun file-mtime (file)
-  (universal-to-timestamp (file-write-date file)))
+(defun last-modified (pathspec)
+  (universal-to-timestamp (file-write-date pathspec)))
 
-(defun file-mtime> (file1 file2)
-  (timestamp> (file-mtime file1) (file-mtime file2)))
+(defun last-modified> (file-a file-b)
+  (timestamp> (last-modified file-a) (last-modified file-b)))
 
 (defun file-date-string (file)
   (multiple-value-bind (sec min hour date mon year)

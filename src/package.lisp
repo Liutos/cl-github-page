@@ -1,6 +1,7 @@
 (defpackage :com.liutos.cl-github-page
   (:nicknames :cl-github-page
-              :clgp)
+              :clgp
+              :akashic)
   (:use :cl
 	:cl-github-page.file-comp
 	:cl-github-page.path)
