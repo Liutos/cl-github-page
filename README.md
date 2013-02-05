@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Akashic is a static blog generator written by Common Lisp.
+Akashic is a tool for generating the static blog based on GitHub Pages, written in Common Lisp.
 
 Its original name is cl-github-page.
 
@@ -20,3 +20,5 @@ Liutos(<mat.liutos@gmail.com>)
 ## TODOs
 
 * <del>convenience for debugging</del>
+* use array for storing posts instead of list
+* use 3rd-party library for generating RSS and Atom

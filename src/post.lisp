@@ -24,13 +24,13 @@
   "Create a post from the file located in `src'."
   (assert (typep src 'pathname))
   (make-instance 'post
-		 :title (pathname-name src)
-		 :content (markdown-to-html src)
-		 :date (post-date-string src)
-		 :rss-date (rss/post-date-string src)
-		 :path (gen-post-path src)
-		 :source-path src
-		 ;; :src-date (universal-to-timestamp (file-write-date src))
+                 :title (pathname-name src)
+                 :content (markdown-to-html src)
+                 :date (post-date-string src)
+                 :rss-date (rss/post-date-string src)
+                 :path (gen-post-path src)
+                 :source-path src
+                 ;; :src-date (universal-to-timestamp (file-write-date src))
                  :src-date (file-write-date src)))
 
 (defun post-updatable-p (post)

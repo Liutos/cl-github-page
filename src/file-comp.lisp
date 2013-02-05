@@ -5,7 +5,7 @@
 		:timestamp>
 		:universal-to-timestamp)
   (:export #:last-modified>
-	   #:file-date-string))
+           #:file-date-string))
 
 (in-package :cl-github-page.file-comp)
 
