@@ -13,6 +13,21 @@ At the beginning, it was developed for simplifying the management of my blog bui
 * Classify posts by categories
 * Atom file generation
 
+## Installation And Usage
+
+In REPL, run the commands:
+
+(push "/path/to/cl-github-page/directory/" asdf:\*central-registry\*)
+(asdf:load-system 'cl-github-page)
+
+After loading the ASDF system, you can run the CL-GITHUB-PAGE:MAIN function for generating a static blog. There must be a directory for storing the directories and files of the blog, the default is directory `src/blog/' at your home directory.
+
+Please ensure the blog directory contains the following sub-directories and files:
+
+* src/ -- For storing the Markdown source text files.
+* posts/ -- For storing the HTML files generated from corresponding Markdown files with same file name.
+* friends.lisp -- Contains the pairs of URLs and website names.
+
 ## Author
 
 Liutos(<mat.liutos@gmail.com>)
