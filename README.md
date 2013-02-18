@@ -37,3 +37,4 @@ Liutos(<mat.liutos@gmail.com>)
 * <del>convenience for debugging</del>
 * use array for storing posts instead of list
 * use 3rd-party library for generating RSS and Atom
+* <del>remove the categories bar in post page</del>

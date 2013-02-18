@@ -52,10 +52,16 @@
   `(or ,var
        (setf ,var ,val)))
 
+(defun cl-github-page-dir ()
+  (asdf:system-source-directory
+   (asdf:find-system 'cl-github-page)))
+
 (defun write-file-by-tmpl (target-file tmpl-file datum)
   (with-open-file (s target-file
 		     :direction :output
 		     :if-exists :supersede)
-    (let ((*default-template-pathname* (merge-pathnames "tmpl/" *blog-dir*)))
+    (let (;; (*default-template-pathname* (merge-pathnames "tmpl/" *blog-dir*))
+          (*default-template-pathname* (merge-pathnames "tmpl/"
+                                                        (cl-github-page-dir))))
       (fill-and-print-template
        tmpl-file datum :stream s))))

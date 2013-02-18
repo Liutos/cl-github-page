@@ -58,7 +58,8 @@
    :post-title (post-title post)
    :post-content (post-content post)
    :friends (make-friends-list)
-   :categories (make-categories-list)))
+   ;; :categories (make-categories-list)
+   ))
 
 (defun write-post (post)
   (with-slots (source-path path) post

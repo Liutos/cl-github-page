@@ -7,7 +7,7 @@
 
 (defsystem :cl-github-page
   :author "Liutos <mat.liutos@gmail.com>"
-  :version "0.0.2"
+  :version "0.0.3"
   :description "Static Blog Generator for GitHub Pages."
   :depends-on (:cl-fad
                :cl-markdown
