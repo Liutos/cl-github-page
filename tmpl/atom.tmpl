@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Liutos</title>
+  <link href="http://liutos.github.com/atom.xml" rel="self" />
+  <link href="http://liutos.github.com/" />
+  <updated></updated>
+  <id></id>
+  <author>
+    <name>Liutos</name>
+    <email>mat.liutos@gmail.com</email>
+  </author>
+  <!-- TMPL_LOOP post-entries -->
+  <entry>
+    <title><!-- TMPL_VAR post-title --></title>
+    <link href="http://liutos.github.com/<!-- TMPL_VAR post-url -->" />
+    <updated><!-- TMPL_VAR post-date --></updated>
+    <id>http://liutos.github.com/<!-- TMPL_VAR post-id --></id>
+    <content type="html"><!-- TMPL_VAR post-content --></content>
+  </entry>
+  <!-- /TMPL_LOOP -->
+</feed>

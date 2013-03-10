@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><!-- TMPL_VAR post-title --> - Liutos的博客</title>
+    <link rel="stylesheet" href="/css/post.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/js/hideshow.js"></script>
+  </head>
+  <body>
+    <div id="outest">
+      <div id="title-part">
+	<!-- TMPL_VAR blog-title -->
+      </div>
+      <div id="tabbar-part">
+	<p><a href="/">回首页</a> | <a href="/atom.xml">RSS</a> | <a href="/aboutMe.html">关于博主</a></p>
+      </div>
+      <div id="post-part">
+	<div id="post-content-part">
+	  <!-- TMPL_VAR personal-info -->
+	</div>
+	<div id="comment-plugin-part">
+	  <div id="disqus_thread"></div>
+	  <script type="text/javascript">
+	    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	    var disqus_shortname = 'liutos'; // required: replace example with your forum shortname
+
+	    /* * * DON'T EDIT BELOW THIS LINE * * */
+	    (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	  </script>
+	  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+	</div>
+      </div>
+      <div id="navigator-part">
+        <fieldset>
+          <legend>标签</legend>
+          <div id="tags-part">
+            <ul>
+              <!-- TMPL_LOOP tags -->
+              <li><!-- TMPL_VAR tag-entry --></li>
+              <!-- /TMPL_LOOP -->
+            </ul>
+	    </div>
+        </fieldset>
+	<div id="categories-part">
+	  <fieldset>
+	    <legend>文章类别</legend>
+	    <ul id="categories">
+	      <!-- TMPL_LOOP categories -->
+	      <li>
+		<a href="javascript: void(0)" onclick="hideShowArticles('<!-- TMPL_VAR category-name -->')"><!-- TMPL_VAR category --></a>
+		<ul id="<!-- TMPL_VAR category-name -->"
+		    style="display: none;">
+		  <!-- TMPL_LOOP articles -->
+		  <li><a href="<!-- TMPL_VAR post-link -->"><!-- TMPL_VAR post-title --></a></li>
+		  <!-- /TMPL_LOOP -->
+		</ul>
+	      </li>
+	      <!-- /TMPL_LOOP -->
+	    </ul>
+	  </fieldset>
+	</div>
+	<div id="friends-part">
+	  <fieldset id="friends-fieldset">
+	    <legend>友情链接</legend>
+	    <ul id="friend-links">
+	      <!-- TMPL_LOOP friends -->
+	      <li><a href="<!-- TMPL_VAR link -->"><!-- TMPL_VAR name --></a></li>
+	      <!-- /TMPL_LOOP -->
+	    </ul>
+	  </fieldset>
+	</div>
+      </div>
+    </div>
+  </body>
+</html>
