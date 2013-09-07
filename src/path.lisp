@@ -1,10 +1,9 @@
 (defpackage :cl-github-page.path
   (:use :cl)
-  (:nicknames :path)
   (:export :get-suffix-path
 	   :chtype))
 
-(in-package :path)
+(in-package :cl-github-page.path)
 
 ;;; get-suffix-path :: pathname -> pathname -> string
 (defun get-suffix-path (path prefix)
