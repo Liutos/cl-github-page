@@ -17,6 +17,8 @@
    :friends (make-friends-list)))
 
 (defun write-about-me ()
+  (unless (probe-file *about-me-src*)
+    (return-from write-about-me))
   (let ((*string-modifier* #'identity))
     (write-file-by-tmpl *about-me*
                         *about-me-tmpl*

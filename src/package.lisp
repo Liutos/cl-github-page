@@ -19,7 +19,8 @@
 		:format-rfc1123-timestring
 		:timestamp>
 		:universal-to-timestamp)
-  (:export :main))
+  (:export :main
+	   :create))
 
 (in-package :cl-github-page)
 
