@@ -5,8 +5,7 @@
 (defun make-blog-title ()
   (with-cache *blog-title*
     (with-output-to-string (s)
-      (let ((*default-template-pathname* (merge-pathnames "tmpl/" ;; *blog-dir*
-							  (cl-github-page-dir))))
+      (let ((*default-template-pathname* (merge-pathnames "tmpl/" (cl-github-page-dir))))
         (fill-and-print-template
          *blog-title-tmpl* nil :stream s)))))
 

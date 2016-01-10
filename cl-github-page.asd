@@ -9,23 +9,26 @@
   :author "Liutos <mat.liutos@gmail.com>"
   :version "0.0.5"
   :description "Static Blog Generator for GitHub Pages."
-  :depends-on (:cl-fad
-               :cl-markdown
-               :cl-who
-               :html-template
-               :local-time)
+  :depends-on (#:cl-fad
+               #:cl-json
+               #:cl-markdown
+               #:cl-who
+               #:html-template
+               #:local-time)
   :components
   ((:module "src"
+            :serial t
             :components
             ((:file "file-comp")
              (:file "path")
-             (:file "package" :depends-on ("file-comp" "path"))
-             (:file "about-me" :depends-on ("package"))
-             (:file "blog" :depends-on ("package"))
-             (:file "cl-github-page" :depends-on ("post" "index" "rss"))
-             (:file "class" :depends-on ("package"))
-             (:file "category" :depends-on ("class"))
-             (:file "post"
-                    :depends-on ("blog" "class" "category"))
-             (:file "index" :depends-on ("blog" "category"))
-             (:file "rss" :depends-on ("post"))))))
+             (:file "package")
+             (:file "misc")
+             (:file "about-me")
+             (:file "blog")
+             (:file "config")
+             (:file "class")
+             (:file "category")
+             (:file "post")
+             (:file "rss")
+             (:file "index")
+             (:file "cl-github-page")))))
