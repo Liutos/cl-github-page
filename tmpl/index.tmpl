@@ -5,27 +5,50 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Liutos的博客</title>
     <link rel="stylesheet" href="/css/index.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
     <script type="text/javascript" src="/js/hideshow.js"></script>
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
   <body>
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">Liutos的博客</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                      <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+                      <li><a href="#">RSS</a></li>
+                      <li><a href="#">关于博主</a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a href="#">乍听之下，不无道理；仔细揣摩，胡说八道(￣ε(#￣)</a></li>
+                  </ul>
+              </div>
+          </div><!-- /.container-fluid -->
+      </nav>
     <div id="outest">
       <div id="title-part">
 	<!-- TMPL_VAR blog-title -->
       </div>
-      <div id="tabbar-part">
-	<p><a href="/">回首页</a> | <a href="/atom.xml">RSS</a> | <a href="/about-me.html">关于博主</a></p>
-      </div>
       <div id="post-part">
-	<fieldset>
-	  <legend>文章列表</legend>
-	  <ul id="posts-list">
-	    <!-- TMPL_LOOP posts-info -->
-	    <li class="post">
-	      <a href="<!-- TMPL_VAR post-link -->"><!-- TMPL_VAR post-title --></a><span class="public-time"><!-- TMPL_VAR post-date --></span>
-	    </li>
-	    <!-- /TMPL_LOOP -->
-	  </ul>
-	</fieldset>
+          <table class="table">
+              <caption>文章列表</caption>
+              <!-- TMPL_LOOP posts-info -->
+              <tr>
+                  <td>
+                      <a href="<!-- TMPL_VAR post-link -->"><!-- TMPL_VAR post-title --></a><span class="public-time"><!-- TMPL_VAR post-date --></span>
+                  </td>
+              </tr>
+              <!-- /TMPL_LOOP -->
+          </table>
       </div>
       <div id="navigator-part">
 	<div id="categories-part">
