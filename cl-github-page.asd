@@ -13,13 +13,19 @@
                #:cl-json
                #:cl-markdown
                #:cl-who
+               #:drakma
+               #:flexi-streams
                #:html-template
                #:local-time)
   :components
   ((:module "src"
             :serial t
             :components
-            ((:file "file-comp")
+            ((:module "compile"
+                      :serial t
+                      :components ((:file "package")
+                                   (:file "index")))
+             (:file "file-comp")
              (:file "path")
              (:file "package")
              (:file "misc")
