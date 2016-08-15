@@ -1,0 +1,106 @@
+(in-package #:com.liutos.cl-github-page.storage)
+
+(defun delete-by-alist (alist table)
+  (let (query
+        where-part)
+    (setf where-part
+          (encode-sql-alist-to-string alist))
+    (setf query
+          (format nil "DELETE FROM `~A` WHERE ~A" table where-part))
+    (query query)))
+
+(defun insert-one-row (alist table)
+  (let (query
+        set-part)
+    (setf set-part
+          (encode-sql-alist-to-string alist))
+    (setf query
+          (format nil "INSERT INTO `~A` SET ~A" table set-part))
+    (query query)))
+
+(defun encode-sql-alist-to-string (alist)
+  (let ((is-empty t))
+    (with-output-to-string (sql)
+      (dolist (element alist)
+        (destructuring-bind (col-name . expr) element
+          (when expr
+            (when (not is-empty)
+              (write-string ", " sql))
+            (let (part)
+              (setf part (format nil "`~A` = ~S" col-name expr))
+              (write-string part sql)
+              (setf is-empty nil))))))))
+
+(defun update-by-id (alist id table)
+  (let (query
+        set-part)
+    (setf set-part
+          (encode-sql-alist-to-string alist))
+    (setf query
+          (format nil "UPDATE `~A` SET ~A WHERE `~A_id` = ~D" table set-part table id))
+    (query query)))
+
+(defun bind-category-post (category-id post-id)
+  (insert-one-row `(("category_id" . ,category-id)
+                    ("post_id" . ,post-id))
+                  "category_post"))
+
+(defun bind-post-tag (post-id tag-id)
+  (insert-one-row `(("post_id" . ,post-id)
+                    ("tag_id" . ,tag-id))
+                  "post_tag"))
+
+(defun create-category (name)
+  (insert-one-row `(("name" . ,name)) "category"))
+
+(defun create-post (body source title)
+  (insert-one-row `(("body" . ,body)
+                    ("source" . ,source)
+                    ("title" . ,title))
+                  "post"))
+
+(defun create-tag (name)
+  (insert-one-row `(("name" . ,name)) "tag"))
+
+(defun start ()
+  (connect
+   :database "cl_github_page"
+   :host "127.0.0.1"
+   :password "2617267"
+   :port 3306
+   :user "root")
+  (query "SET NAMES utf8"))
+
+(defun stop ()
+  (disconnect))
+
+(defun unbind-category-post (category-id post-id)
+  (delete-by-alist `(("category_id" . ,category-id)
+                     ("post_id" . ,post-id))
+                   "category_post"))
+
+(defun unbind-post-tag (post-id tag-id)
+  (delete-by-alist `(("post_id" . ,post-id)
+                     ("tag_id" . ,tag-id))
+                   "post_tag"))
+
+(defun update-category (category-id
+                        &key
+                          name)
+  (update-by-id `(("name" . ,name)) category-id "category"))
+
+(defun update-post (post-id
+                    &key
+                      body
+                      source
+                      title)
+  (update-by-id `(("body" . ,body)
+                  ("source" . ,source)
+                  ("title" . ,title))
+                post-id
+                "post"))
+
+(defun update-tag (tag-id
+                   &key
+                     name)
+  (update-by-id `(("name" . ,name)) tag-id "tag"))

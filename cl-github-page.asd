@@ -12,6 +12,7 @@
   :depends-on (#:cl-fad
                #:cl-json
                #:cl-markdown
+               #:cl-mysql
                #:cl-who
                #:drakma
                #:flexi-streams
@@ -26,6 +27,10 @@
                       :components ((:file "package")
                                    (:file "index")))
              (:module "file"
+                      :serial t
+                      :components ((:file "package")
+                                   (:file "index")))
+             (:module "storage"
                       :serial t
                       :components ((:file "package")
                                    (:file "index")))
