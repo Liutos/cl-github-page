@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title></title>
+        <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <style type="text/css">
+            .blog-description {
+                color: #999;
+                font-size: 20px;
+            }
+            .blog-main {
+                font-size: 18px;
+            }
+            .blog-masthead {
+                background-color: #428bca;
+            }
+            .blog-nav-item {
+                color: #cdddeb;
+                font-size: 31px;
+                padding: 10px;
+            }
+            .blog-post-meta {
+                color: #999;
+            }
+            .blog-post-title {
+                font-size: 40px;
+            }
+            .blog-title {
+                font-size: 60px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="blog-masthead">
+            <div class="container">
+                <nav class="blog-nav">
+                    <a class="blog-nav-item">首页</a>
+                    <a class="blog-nav-item">关于</a>
+                </nav>
+            </div>
+        </div>
+        <div class="container">
+            <div class="blog-header">
+                <h1 class="blog-title"><!-- TMPL_VAR blog-title --></h1>
+                <p class="blog-description"><!-- TMPL_VAR blog-description --></p>
+            </div>
+            <div class="row">
+                <div class="blog-main col-sm-8">
+                    <div class="blog-post">
+                        <h2 class="blog-post-title"><!-- TMPL_VAR post-title --></h2>
+                        <p class="blog-post-meta"><!-- TMPL_VAR post-meta --></p>
+                        <!-- TMPL_VAR post-body -->
+                    </div>
+                </div>
+                <div class="blog-sidebar col-sm-3">
+                    <div class="sidebar-module">
+                        <h4>分类</h4>
+                        <ol class="list-unstyled">
+                            <!-- TMPL_LOOP categories -->
+                            <li><!-- TMPL_VAR name --></li>
+                            <!-- /TMPL_LOOP -->
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="blog-footer">
+        </footer>
+        <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </body>
+</html>
