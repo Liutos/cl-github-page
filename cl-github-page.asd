@@ -38,6 +38,10 @@
                       :serial t
                       :components ((:file "package")
                                    (:file "index")))
+             (:module "article"
+                      :serial t
+                      :components ((:file "package")
+                                   (:file "index")))
              (:file "file-comp")
              (:file "path")
              (:file "package")

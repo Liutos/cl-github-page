@@ -9,6 +9,7 @@
            #:create-category
            #:create-post
            #:create-tag
+           #:find-post-by-source
            #:start
            #:stop
            #:unbind-category-post

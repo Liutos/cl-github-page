@@ -45,6 +45,8 @@
           (format nil "UPDATE `~A` SET ~A WHERE `~A_id` = ~D" table set-part table id))
     (query query)))
 
+;;; EXPORT
+
 (defun bind-category-post (category-id post-id)
   (insert-one-row `(("category_id" . ,category-id)
                     ("post_id" . ,post-id))
@@ -69,6 +71,15 @@
 
 (defun create-tag (name)
   (insert-one-row `(("name" . ,name)) "tag"))
+
+(defun find-post-by-source (source)
+  (let (query
+        result-set)
+    (setf query
+          (format nil "SELECT * FROM `post` WHERE `source` = ~S LIMIT 1" source))
+    (setf result-set
+          (query query))
+    (caaar result-set)))
 
 (defun start ()
   (connect
