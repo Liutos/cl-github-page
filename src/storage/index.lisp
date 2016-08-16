@@ -9,15 +9,6 @@
           (format nil "DELETE FROM `~A` WHERE ~A" table where-part))
     (query query)))
 
-(defun insert-one-row (alist table)
-  (let (query
-        set-part)
-    (setf set-part
-          (encode-sql-alist-to-string alist))
-    (setf query
-          (format nil "INSERT INTO `~A` SET ~A" table set-part))
-    (query query)))
-
 (defun encode-sql-alist-to-string (alist)
   (let ((is-empty t))
     (with-output-to-string (sql)
@@ -30,6 +21,20 @@
               (setf part (format nil "`~A` = ~S" col-name expr))
               (write-string part sql)
               (setf is-empty nil))))))))
+
+(defun insert-one-row (alist table)
+  (let (query
+        set-part)
+    (setf set-part
+          (encode-sql-alist-to-string alist))
+    (setf query
+          (format nil "INSERT INTO `~A` SET ~A" table set-part))
+    (query query)))
+
+(defun make-datetime-of-now ()
+  (let ((timestamp (local-time:now))
+        (format '(:year "-" :month "-" :day " " :hour ":" :min ":" :sec)))
+    (local-time:format-timestring nil timestamp :format format)))
 
 (defun update-by-id (alist id table)
   (let (query
@@ -53,10 +58,13 @@
 (defun create-category (name)
   (insert-one-row `(("name" . ,name)) "category"))
 
-(defun create-post (body source title)
+(defun create-post (body is-active source title)
   (insert-one-row `(("body" . ,body)
+                    ("create_at" . ,(make-datetime-of-now))
+                    ("is_active" . ,is-active)
                     ("source" . ,source)
-                    ("title" . ,title))
+                    ("title" . ,title)
+                    ("update_at" . ,(make-datetime-of-now)))
                   "post"))
 
 (defun create-tag (name)
@@ -92,11 +100,14 @@
 (defun update-post (post-id
                     &key
                       body
+                      is-active
                       source
                       title)
   (update-by-id `(("body" . ,body)
+                  ("is_active" . ,is-active)
                   ("source" . ,source)
-                  ("title" . ,title))
+                  ("title" . ,title)
+                  ("update_at" . ,(make-datetime-of-now)))
                 post-id
                 "post"))
 
