@@ -11,7 +11,8 @@
         posts)
     (setf posts
           (mapcar #'(lambda (post)
-                      (list :post-title (getf post :title)))
+                      (list :post-title (getf post :title)
+                            :post-url (format nil "~D.html" (getf post :post_id))))
                   post-list))
     (com.liutos.cl-github-page.template:fill-index-template blog-description
                                                             blog-title
