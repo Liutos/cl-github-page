@@ -1,15 +1,14 @@
 (in-package #:com.liutos.cl-github-page.file)
 
 (defun get-file-content (filespec)
-  (with-open-file (stream filespec)
-    (let (content
-          length)
-      (setf length
-            (file-length stream))
-      (setf content
-            (make-string length))
+  (with-open-file (stream filespec
+                          :element-type '(unsigned-byte 8))
+    (let* ((length (file-length stream))
+           (content (make-array length
+                                :element-type '(unsigned-byte 8))))
       (read-sequence content stream)
-      content)))
+      (flexi-streams:octets-to-string content
+                                      :external-format :utf-8))))
 
 (defun is-file-exists (pathspec)
   (and (file-exists-p pathspec)
