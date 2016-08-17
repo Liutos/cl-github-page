@@ -36,6 +36,17 @@
         (format '(:year "-" :month "-" :day " " :hour ":" :min ":" :sec)))
     (local-time:format-timestring nil timestamp :format format)))
 
+(defun make-plist-from-rows (result-set)
+  (let ((fields (cadar result-set))
+        (rows (caar result-set)))
+    (mapcar #'(lambda (row)
+                (mapcan #'(lambda (field expr)
+                            (list (intern (string-upcase (car field)) :keyword)
+                                  expr))
+                        fields
+                        row))
+            rows)))
+
 (defun update-by-id (alist id table)
   (let (query
         set-part)
@@ -83,7 +94,7 @@
           (format nil "SELECT * FROM `post` WHERE `post_id` = ~D" post-id))
     (setf result-set
           (query query))
-    (caaar result-set)))
+    (car (make-plist-from-rows result-set))))
 
 (defun find-post-by-source (source)
   (let (query
