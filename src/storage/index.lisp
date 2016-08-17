@@ -72,6 +72,10 @@
 (defun create-tag (name)
   (insert-one-row `(("name" . ,name)) "tag"))
 
+(defun delete-post (post-id)
+  (delete-by-alist `(("post_id" . ,post-id))
+                   "post"))
+
 (defun find-post (post-id)
   (let (query
         result-set)

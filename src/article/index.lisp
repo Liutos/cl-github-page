@@ -16,6 +16,11 @@
                                                    source
                                                    title)))
 
+(defun delete-post (post-id)
+  (unless (com.liutos.cl-github-page.storage:find-post post-id)
+    (error "~D: 文章不存在" post-id))
+  (com.liutos.cl-github-page.storage:delete-post post-id))
+
 (defun modify-post (post-id
                     source
                     title)
