@@ -12,6 +12,7 @@
            #:delete-post
            #:find-post
            #:find-post-by-source
+           #:get-post-list
            #:start
            #:stop
            #:unbind-category-post

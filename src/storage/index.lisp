@@ -105,6 +105,11 @@
           (query query))
     (caaar result-set)))
 
+(defun get-post-list ()
+  (let* ((query (format nil "SELECT * FROM `post`"))
+         (result-set (query query)))
+    (make-plist-from-rows result-set)))
+
 (defun start ()
   (connect
    :database "cl_github_page"
