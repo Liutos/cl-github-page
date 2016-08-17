@@ -25,6 +25,8 @@
         (error "~A: 文件不存在" source)))
   (when (com.liutos.cl-github-page.storage:find-post-by-source source)
     (error "存在一模一样的文章"))
+  (unless (com.liutos.cl-github-page.storage:find-post post-id)
+    (error "~D: 文章不存在" post-id))
   (let (body)
     (setf body
           (com.liutos.cl-github-page.compile:compile-from-markdown source))
@@ -32,3 +34,9 @@
                                                    :body body
                                                    :source source
                                                    :title title)))
+
+(defun unshelve-post (post-id)
+  (unless (com.liutos.cl-github-page.storage:find-post post-id)
+    (error "~D: 文章不存在" post-id))
+  (com.liutos.cl-github-page.storage:update-post post-id
+                                                 :is-active 0))

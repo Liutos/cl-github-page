@@ -72,6 +72,15 @@
 (defun create-tag (name)
   (insert-one-row `(("name" . ,name)) "tag"))
 
+(defun find-post (post-id)
+  (let (query
+        result-set)
+    (setf query
+          (format nil "SELECT * FROM `post` WHERE `post_id` = ~D" post-id))
+    (setf result-set
+          (query query))
+    (caaar result-set)))
+
 (defun find-post-by-source (source)
   (let (query
         result-set)
