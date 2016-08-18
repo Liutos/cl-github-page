@@ -42,7 +42,7 @@
           (categories '())
           (destination (make-post-path post-id))
           (post-body (getf post :body))
-          (post-meta (getf post :create_at))
+          (post-meta (com.liutos.cl-github-page.post:make-post-meta post))
           (post-title (getf post :title)))
       (com.liutos.cl-github-page.template:fill-post-template blog-description
                                                              blog-title
