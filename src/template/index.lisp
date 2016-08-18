@@ -30,7 +30,8 @@
                             posts
                             &key
                               destination)
-  (let ((template #p"/media/world2/liutos/src/cl/cl-github-page/src/template/tmpl/index.html")
+  (let ((html-template:*string-modifier* #'identity)
+        (template #p"/media/world2/liutos/src/cl/cl-github-page/src/template/tmpl/index.html")
         (values (list :blog-description blog-description
                       :blog-title blog-title
                       :categories categories

@@ -1,6 +1,6 @@
 (in-package #:com.liutos.cl-github-page.page)
 
-(defvar *blog-description* "")
+(defparameter *blog-description* "由<a href=\"https://github.com/Liutos/cl-github-page\">cl-github-page</a>提供技术支持")
 (defparameter *blog-root* #P"/home/liutos/src/blog2/")
 (defvar *blog-title* "Liutos的博客")
 
