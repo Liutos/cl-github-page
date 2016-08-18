@@ -1,6 +1,8 @@
 (in-package #:com.liutos.cl-github-page.template)
 
-(defvar *template-dir* #P"/home/liutos/src/cl/cl-github-page/src/template/tmpl/")
+(defparameter *template-dir*
+  (merge-pathnames "src/template/tmpl/"
+                   (asdf:system-source-directory 'cl-github-page)))
 
 (defgeneric fill-template-and-print (destination template values))
 
