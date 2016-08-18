@@ -1,5 +1,7 @@
 (in-package #:com.liutos.cl-github-page.template)
 
+(defvar *template-dir* #P"/home/liutos/src/cl/cl-github-page/src/template/tmpl/")
+
 (defgeneric fill-template-and-print (destination template values))
 
 (defmethod fill-template-and-print ((destination (eql nil)) template values)
@@ -13,9 +15,10 @@
     (fill-template-and-print file template values)))
 
 (defmethod fill-template-and-print ((destination stream) template values)
-  (html-template:fill-and-print-template template
-                                         values
-                                         :stream destination))
+  (let ((html-template:*default-template-pathname* *template-dir*))
+    (html-template:fill-and-print-template template
+                                           values
+                                           :stream destination)))
 
 ;;; EXPORT
 
