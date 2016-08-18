@@ -1,24 +1,37 @@
 (in-package #:com.liutos.cl-github-page.page)
 
 (defvar *blog-description* "")
+(defparameter *blog-root* #P"/home/liutos/src/blog2/")
 (defvar *blog-title* "Liutos的博客")
+
+(defun make-index-path ()
+  (merge-pathnames "index.html" *blog-root*))
+
+(defun make-post-path (post-id)
+  (merge-pathnames (format nil "posts/~D.html" post-id) *blog-root*))
+
+(defun make-post-url (post-id)
+  (format nil "posts/~D.html" post-id))
+
+;;; EXPORT
 
 (defun write-index-page ()
   (let ((blog-description *blog-description*)
         (blog-title *blog-title*)
         (categories '())
+        (destination (make-index-path))
         (post-list (com.liutos.cl-github-page.storage:get-post-list))
         posts)
     (setf posts
           (mapcar #'(lambda (post)
                       (list :post-title (getf post :title)
-                            :post-url (format nil "~D.html" (getf post :post_id))))
+                            :post-url (make-post-url (getf post :post_id))))
                   post-list))
     (com.liutos.cl-github-page.template:fill-index-template blog-description
                                                             blog-title
                                                             categories
                                                             posts
-                                                            :destination #P"/tmp/index.html")))
+                                                            :destination destination)))
 
 (defun write-post-page (post-id)
   (let ((post (com.liutos.cl-github-page.storage:find-post post-id)))
@@ -27,7 +40,7 @@
     (let ((blog-description *blog-description*)
           (blog-title *blog-title*)
           (categories '())
-          (destination (pathname (format nil "/tmp/~D.html" post-id)))
+          (destination (make-post-path post-id))
           (post-body (getf post :body))
           (post-meta (getf post :create_at))
           (post-title (getf post :title)))
