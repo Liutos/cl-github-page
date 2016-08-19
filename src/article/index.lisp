@@ -9,7 +9,10 @@
 ;;; EXPORT
 
 (defun add-post (source
-                 title)
+                 &optional
+                   title)
+  (when (and (pathnamep source) (null title))
+    (setf title (com.liutos.cl-github-page.file:get-basename source)))
   (when (pathnamep source)
     (if (com.liutos.cl-github-page.file:is-file-exists source)
         (setf source (com.liutos.cl-github-page.file:get-file-content source))

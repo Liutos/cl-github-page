@@ -1,5 +1,12 @@
 (in-package #:com.liutos.cl-github-page.file)
 
+(defun get-basename (pathname)
+  (when (pathnamep pathname)
+    (setf pathname (namestring pathname)))
+  (let ((dot-position (position #\. pathname :from-end t))
+        (slash-position (position #\/ pathname :from-end t)))
+    (subseq pathname (1+ slash-position) dot-position)))
+
 (defun get-file-content (filespec)
   (with-open-file (stream filespec
                           :element-type '(unsigned-byte 8))

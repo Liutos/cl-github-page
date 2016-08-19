@@ -3,6 +3,7 @@
   (:import-from #:cl-fad
                 #:directory-exists-p
                 #:file-exists-p)
-  (:export #:get-file-content
+  (:export #:get-basename
+           #:get-file-content
            #:is-file-exists
            #:set-file-content))
