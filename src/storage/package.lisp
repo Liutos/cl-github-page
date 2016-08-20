@@ -10,8 +10,10 @@
            #:create-post
            #:create-tag
            #:delete-post
+           #:find-next-post
            #:find-post
            #:find-post-by-source
+           #:find-prev-post
            #:get-post-list
            #:start
            #:stop

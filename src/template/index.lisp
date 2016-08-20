@@ -41,10 +41,12 @@
 (defun fill-post-template (blog-description
                            blog-title
                            categories
+                           next-post-id
                            post-body
                            post-id
                            post-meta
                            post-title
+                           prev-post-id
                            &key
                              destination)
   (let ((html-template:*string-modifier* #'identity)
@@ -52,8 +54,10 @@
         (values (list :blog-description blog-description
                       :blog-title blog-title
                       :categories categories
+                      :next-post-id next-post-id
                       :post-body post-body
                       :post-id post-id
                       :post-meta post-meta
-                      :post-title post-title)))
+                      :post-title post-title
+                      :prev-post-id prev-post-id)))
     (fill-template-and-print destination template values)))

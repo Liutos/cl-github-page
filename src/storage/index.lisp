@@ -87,6 +87,11 @@
   (delete-by-alist `(("post_id" . ,post-id))
                    "post"))
 
+(defun find-next-post (post-id)
+  (let* ((query (format nil "SELECT * FROM `post` WHERE `post_id` > ~D ORDER BY `post_id` ASC LIMIT 1" post-id))
+         (result-set (query query)))
+    (car (make-plist-from-rows result-set))))
+
 (defun find-post (post-id)
   (let (query
         result-set)
@@ -104,6 +109,11 @@
     (setf result-set
           (query query))
     (caaar result-set)))
+
+(defun find-prev-post (post-id)
+  (let* ((query (format nil "SELECT * FROM `post` WHERE `post_id` < ~D ORDER BY `post_id` DESC LIMIT 1" post-id))
+         (result-set (query query)))
+    (car (make-plist-from-rows result-set))))
 
 (defun get-post-list ()
   (let* ((query (format nil "SELECT * FROM `post`"))
