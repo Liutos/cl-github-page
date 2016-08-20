@@ -23,11 +23,12 @@
                       (list :post-title (getf post :title)
                             :post-url (make-post-url (getf post :post_id))))
                   post-list))
-    (com.liutos.cl-github-page.template:fill-index-template blog-description
-                                                            blog-title
-                                                            categories
-                                                            posts
-                                                            :destination destination)))
+    (com.liutos.cl-github-page.template:fill-index-template
+     :blog-description blog-description
+     :blog-title blog-title
+     :categories categories
+     :posts posts
+     :destination destination)))
 
 (defun write-post-page (post-id)
   (let ((post (com.liutos.cl-github-page.storage:find-post post-id)))
@@ -42,13 +43,14 @@
           (post-meta (com.liutos.cl-github-page.post:make-post-meta post))
           (post-title (getf post :title))
           (prev-post (com.liutos.cl-github-page.storage:find-prev-post post-id)))
-      (com.liutos.cl-github-page.template:fill-post-template blog-description
-                                                             blog-title
-                                                             categories
-                                                             (getf next-post :post_id)
-                                                             post-body
-                                                             post-id
-                                                             post-meta
-                                                             post-title
-                                                             (getf prev-post :post_id)
-                                                             :destination destination))))
+      (com.liutos.cl-github-page.template:fill-post-template
+       :blog-description blog-description
+       :blog-title blog-title
+       :categories categories
+       :next-post-id (getf next-post :post_id)
+       :post-body post-body
+       :post-id post-id
+       :post-meta post-meta
+       :post-title post-title
+       :prev-post-id (getf prev-post :post_id)
+       :destination destination))))

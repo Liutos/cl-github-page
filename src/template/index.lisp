@@ -24,40 +24,21 @@
 
 ;;; EXPORT
 
-(defun fill-index-template (blog-description
-                            blog-title
-                            categories
-                            posts
+(defun fill-index-template (&rest
+                              args
                             &key
-                              destination)
+                              destination
+                              &allow-other-keys)
   (let ((html-template:*string-modifier* #'identity)
-        (template #p"/media/world2/liutos/src/cl/cl-github-page/src/template/tmpl/index.html")
-        (values (list :blog-description blog-description
-                      :blog-title blog-title
-                      :categories categories
-                      :posts posts)))
-    (fill-template-and-print destination template values)))
+        (template #p"index.html"))
+    (fill-template-and-print destination template args)))
 
-(defun fill-post-template (blog-description
-                           blog-title
-                           categories
-                           next-post-id
-                           post-body
-                           post-id
-                           post-meta
-                           post-title
-                           prev-post-id
+(defun fill-post-template (&rest
+                             args
                            &key
-                             destination)
+                             destination
+                             &allow-other-keys)
+  (declare (ignorable args))
   (let ((html-template:*string-modifier* #'identity)
-        (template #p"/media/world2/liutos/src/cl/cl-github-page/src/template/tmpl/post.html")
-        (values (list :blog-description blog-description
-                      :blog-title blog-title
-                      :categories categories
-                      :next-post-id next-post-id
-                      :post-body post-body
-                      :post-id post-id
-                      :post-meta post-meta
-                      :post-title post-title
-                      :prev-post-id prev-post-id)))
-    (fill-template-and-print destination template values)))
+        (template #p"post.html"))
+    (fill-template-and-print destination template args)))
