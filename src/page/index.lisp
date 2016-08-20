@@ -20,7 +20,7 @@
   (merge-pathnames (format nil "posts/~D.html" post-id) (com.liutos.cl-github-page.config:get-blog-root)))
 
 (defun make-post-url (post-id)
-  (format nil "posts/~D.html" post-id))
+  (format nil "/posts/~D.html" post-id))
 
 ;;; EXPORT
 
