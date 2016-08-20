@@ -2,4 +2,5 @@
   (:use :cl)
   (:export #:get-blog-description
            #:get-blog-root
-           #:get-blog-title))
+           #:get-blog-title
+           #:get-posts-per-page))

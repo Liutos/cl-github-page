@@ -8,3 +8,6 @@
 
 (defun get-blog-title ()
   "Liutos的博客")
+
+(defun get-posts-per-page ()
+  7)

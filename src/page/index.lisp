@@ -3,6 +3,16 @@
 (defun make-index-path ()
   (merge-pathnames "index.html" (com.liutos.cl-github-page.config:get-blog-root)))
 
+(defun make-pages-data (n)
+  (let ((pages '()))
+    (dotimes (i n (nreverse pages))
+      (let ((file-name (if (= i 0)
+                           "/index.html"
+                           (format nil "/pages/~D.html" (1+ i)))))
+        (push (list :file-name file-name
+                    :page-number (1+ i))
+              pages)))))
+
 (defun make-post-path (post-id)
   (merge-pathnames (format nil "posts/~D.html" post-id) (com.liutos.cl-github-page.config:get-blog-root)))
 
@@ -17,16 +27,21 @@
         (categories '())
         (destination (make-index-path))
         (post-list (com.liutos.cl-github-page.storage:get-post-list))
+        pages
         posts)
     (setf posts
           (mapcar #'(lambda (post)
                       (list :post-title (getf post :title)
                             :post-url (make-post-url (getf post :post_id))))
                   post-list))
+    (setf pages
+          (make-pages-data
+           (ceiling (/ (length posts) (com.liutos.cl-github-page.config:get-posts-per-page)))))
     (com.liutos.cl-github-page.template:fill-index-template
      :blog-description blog-description
      :blog-title blog-title
      :categories categories
+     :pages pages
      :posts posts
      :destination destination)))
 
