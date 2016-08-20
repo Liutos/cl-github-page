@@ -22,7 +22,11 @@
   ((:module "src"
             :serial t
             :components
-            ((:module "compile"
+            ((:module "common"
+                      :serial t
+                      :components ((:file "package")
+                                   (:file "index")))
+             (:module "compile"
                       :serial t
                       :components ((:file "package")
                                    (:file "index")))

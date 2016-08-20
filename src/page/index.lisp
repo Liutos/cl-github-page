@@ -53,4 +53,6 @@
        :post-meta post-meta
        :post-title post-title
        :prev-post-id (getf prev-post :post_id)
-       :destination destination))))
+       :destination destination)
+      (com.liutos.cl-github-page.storage:update-post post-id
+                                                     :build-at (com.liutos.cl-github-page.misc:make-datetime-of-now)))))

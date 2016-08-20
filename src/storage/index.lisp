@@ -31,11 +31,6 @@
           (format nil "INSERT INTO `~A` SET ~A" table set-part))
     (query query)))
 
-(defun make-datetime-of-now ()
-  (let ((timestamp (local-time:now))
-        (format '(:year "-" :month "-" :day " " :hour ":" :min ":" :sec)))
-    (local-time:format-timestring nil timestamp :format format)))
-
 (defun make-plist-from-rows (result-set)
   (let ((fields (cadar result-set))
         (rows (caar result-set)))
@@ -150,10 +145,12 @@
 (defun update-post (post-id
                     &key
                       body
+                      build-at
                       is-active
                       source
                       title)
   (update-by-id `(("body" . ,body)
+                  ("build_at" . ,build-at)
                   ("is_active" . ,is-active)
                   ("source" . ,source)
                   ("title" . ,title)

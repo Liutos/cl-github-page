@@ -1,5 +1,6 @@
 (defpackage #:com.liutos.cl-github-page.storage
-  (:use :cl)
+  (:use :cl
+        :com.liutos.cl-github-page.misc)
   (:import-from #:cl-mysql
                 #:connect
                 #:disconnect

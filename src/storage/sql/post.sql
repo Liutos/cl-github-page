@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS `post`;
 
 CREATE TABLE `post` (
     `body` TEXT NOT NULL COMMENT '文章正文',
+    `build_at` DATETIME DEFAULT NULL COMMENT '文章最后一次写入到页面文件的时刻',
     `create_at` DATETIME NOT NULL COMMENT '文章创建的时刻',
     `is_active` BOOLEAN NOT NULL COMMENT '文章是否可见',
     `post_id` INT NOT NULL AUTO_INCREMENT,
