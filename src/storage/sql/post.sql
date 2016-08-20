@@ -9,5 +9,6 @@ CREATE TABLE `post` (
     `source` TEXT NOT NULL COMMENT '源文件内容',
     `title` VARCHAR(100) NOT NULL COMMENT '文章标题',
     `update_at` DATETIME NOT NULL COMMENT '文章最后一次修改的时刻',
+    `write_at` DATETIME NOT NULL COMMENT '文章被创作的时刻',
     PRIMARY KEY (`post_id`)
 );

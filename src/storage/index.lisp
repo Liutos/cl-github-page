@@ -66,13 +66,16 @@
 (defun create-category (name)
   (insert-one-row `(("name" . ,name)) "category"))
 
-(defun create-post (body is-active source title)
+(defun create-post (body is-active source title
+                    &optional
+                      (write-at (make-datetime-of-now)))
   (insert-one-row `(("body" . ,body)
                     ("create_at" . ,(make-datetime-of-now))
                     ("is_active" . ,is-active)
                     ("source" . ,source)
                     ("title" . ,title)
-                    ("update_at" . ,(make-datetime-of-now)))
+                    ("update_at" . ,(make-datetime-of-now))
+                    ("write_at" . ,write-at))
                   "post"))
 
 (defun create-tag (name)
@@ -111,7 +114,7 @@
     (car (make-plist-from-rows result-set))))
 
 (defun get-post-list ()
-  (let* ((query (format nil "SELECT * FROM `post`"))
+  (let* ((query (format nil "SELECT * FROM `post` ORDER BY `write_at` DESC"))
          (result-set (query query)))
     (make-plist-from-rows result-set)))
 
@@ -148,13 +151,15 @@
                       build-at
                       is-active
                       source
-                      title)
+                      title
+                      write-at)
   (update-by-id `(("body" . ,body)
                   ("build_at" . ,build-at)
                   ("is_active" . ,is-active)
                   ("source" . ,source)
                   ("title" . ,title)
-                  ("update_at" . ,(make-datetime-of-now)))
+                  ("update_at" . ,(make-datetime-of-now))
+                  ("write_at" . ,write-at))
                 post-id
                 "post"))
 
