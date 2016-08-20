@@ -4,4 +4,5 @@
                 #:http-request)
   (:import-from #:json
                 #:encode-json-alist-to-string)
-  (:export #:compile-from-markdown))
+  (:export #:*mode*
+           #:compile-from-markdown))
