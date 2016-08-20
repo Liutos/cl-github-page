@@ -1,7 +1,10 @@
 (in-package #:com.liutos.cl-github-page.page)
 
-(defun make-index-path ()
-  (merge-pathnames "index.html" (com.liutos.cl-github-page.config:get-blog-root)))
+(defun make-pagination-path (page-number)
+  (let ((path (if (zerop page-number)
+                  "index.html"
+                  (format nil "pages/~D.html" (1+ page-number)))))
+    (merge-pathnames path (com.liutos.cl-github-page.config:get-blog-root))))
 
 (defun make-pages-data (n)
   (let ((pages '()))
@@ -22,11 +25,15 @@
 ;;; EXPORT
 
 (defun write-index-page ()
+  (write-pagination-page 0))
+
+(defun write-pagination-page (page-number)
   (let ((blog-description (com.liutos.cl-github-page.config:get-blog-description))
         (blog-title (com.liutos.cl-github-page.config:get-blog-title))
         (categories '())
-        (destination (make-index-path))
+        (destination (make-pagination-path page-number))
         (post-list (com.liutos.cl-github-page.storage:get-post-list))
+        (p3 (com.liutos.cl-github-page.config:get-posts-per-page))
         pages
         posts)
     (setf posts
@@ -36,8 +43,12 @@
                   post-list))
     (setf pages
           (make-pages-data
-           (ceiling (/ (length posts) (com.liutos.cl-github-page.config:get-posts-per-page)))))
-    (com.liutos.cl-github-page.template:fill-index-template
+           (ceiling (/ (length posts) p3))))
+    (setf posts
+          (subseq posts
+                  (* page-number p3)
+                  (min (length posts) (* (1+ page-number) p3))))
+    (com.liutos.cl-github-page.template:fill-page-template
      :blog-description blog-description
      :blog-title blog-title
      :categories categories

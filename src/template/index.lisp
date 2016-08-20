@@ -24,13 +24,13 @@
 
 ;;; EXPORT
 
-(defun fill-index-template (&rest
+(defun fill-page-template (&rest
                               args
                             &key
                               destination
                               &allow-other-keys)
   (let ((html-template:*string-modifier* #'identity)
-        (template #p"index.html"))
+        (template #p"page.html"))
     (fill-template-and-print destination template args)))
 
 (defun fill-post-template (&rest

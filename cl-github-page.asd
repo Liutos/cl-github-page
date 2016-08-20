@@ -46,11 +46,11 @@
                       :serial t
                       :components ((:file "package")
                                    (:file "index")))
-             (:module "page"
+             (:module "cfg"
                       :serial t
                       :components ((:file "package")
                                    (:file "index")))
-             (:module "cfg"
+             (:module "page"
                       :serial t
                       :components ((:file "package")
                                    (:file "index")))
