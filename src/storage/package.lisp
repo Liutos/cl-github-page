@@ -11,6 +11,7 @@
            #:create-post
            #:create-tag
            #:delete-post
+           #:find-category-by-name
            #:find-next-post
            #:find-post
            #:find-post-by-source

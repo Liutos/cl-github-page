@@ -24,6 +24,11 @@
 
 ;;; EXPORT
 
+(defun write-all-posts ()
+  (let ((posts (com.liutos.cl-github-page.storage:get-post-list)))
+    (dolist (post posts)
+      (write-post-page (getf post :post_id)))))
+
 (defun write-index-page ()
   (write-pagination-page 0))
 
