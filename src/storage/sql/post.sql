@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS `post`;
 
 CREATE TABLE `post` (
+    `author` VARCHAR(100) COMMENT '文章作者',
     `body` TEXT NOT NULL COMMENT '文章正文',
     `build_at` DATETIME DEFAULT NULL COMMENT '文章最后一次写入到页面文件的时刻',
     `create_at` DATETIME NOT NULL COMMENT '文章创建的时刻',

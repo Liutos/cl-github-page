@@ -17,7 +17,8 @@
                #:drakma
                #:flexi-streams
                #:html-template
-               #:local-time)
+               #:local-time
+               #:osicat)
   :components
   ((:module "src"
             :serial t

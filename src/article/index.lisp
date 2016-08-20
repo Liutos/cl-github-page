@@ -10,6 +10,7 @@
 
 (defun add-post (source
                  &key
+                   (author (osicat:environment-variable "USER"))
                    title
                    write-at)
   (when (and (pathnamep source) (null title))
@@ -27,23 +28,13 @@
                                                    1
                                                    source
                                                    title
-                                                   write-at)))
+                                                   :author author
+                                                   :write-at write-at)))
 
 (defun delete-post (post-id)
   (unless (com.liutos.cl-github-page.storage:find-post post-id)
     (error "~D: 文章不存在" post-id))
   (com.liutos.cl-github-page.storage:delete-post post-id))
-
-(defun make-post-meta (post)
-  (let ((create-at (getf post :create_at))
-        meta
-        (update-at (getf post :update_at)))
-    (setf meta
-          (format nil "首次创建于~A" (universal-to-string create-at)))
-    (unless (= update-at create-at)
-      (setf meta
-            (format nil "~A 最后更新于~A" meta (universal-to-string update-at))))
-    meta))
 
 (defun make-post-write-at (post)
   (let* ((write-at (getf post :write_at))

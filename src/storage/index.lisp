@@ -67,9 +67,11 @@
   (insert-one-row `(("name" . ,name)) "category"))
 
 (defun create-post (body is-active source title
-                    &optional
+                    &key
+                      author
                       (write-at (make-datetime-of-now)))
-  (insert-one-row `(("body" . ,body)
+  (insert-one-row `(("author" . ,author)
+                    ("body" . ,body)
                     ("create_at" . ,(make-datetime-of-now))
                     ("is_active" . ,is-active)
                     ("source" . ,source)
@@ -147,13 +149,15 @@
 
 (defun update-post (post-id
                     &key
+                      author
                       body
                       build-at
                       is-active
                       source
                       title
                       write-at)
-  (update-by-id `(("body" . ,body)
+  (update-by-id `(("author" . ,author)
+                  ("body" . ,body)
                   ("build_at" . ,build-at)
                   ("is_active" . ,is-active)
                   ("source" . ,source)

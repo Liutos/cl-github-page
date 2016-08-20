@@ -67,17 +67,18 @@
           (destination (make-post-path post-id))
           (next-post (com.liutos.cl-github-page.storage:find-next-post post-id))
           (post-body (getf post :body))
-          (post-meta (com.liutos.cl-github-page.post:make-post-meta post))
           (post-title (getf post :title))
+          (post-write-at (com.liutos.cl-github-page.post:make-post-write-at post))
           (prev-post (com.liutos.cl-github-page.storage:find-prev-post post-id)))
       (com.liutos.cl-github-page.template:fill-post-template
        :blog-description blog-description
        :blog-title blog-title
        :categories categories
        :next-post-id (getf next-post :post_id)
+       :post-author (getf post :author)
        :post-body post-body
        :post-id post-id
-       :post-meta post-meta
+       :post-write-at post-write-at
        :post-title post-title
        :prev-post-id (getf prev-post :post_id)
        :destination destination)
