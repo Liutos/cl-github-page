@@ -14,12 +14,15 @@
                         <tbody>
                             <!-- TMPL_LOOP posts -->
                             <tr>
-                                <td><a href="<!-- TMPL_VAR post-url -->"><!-- TMPL_VAR post-title --></a></td>
+                                <td>
+                                    <span class="blog-post-write-at"><!-- TMPL_VAR post-write-at --></span>
+                                    <a href="<!-- TMPL_VAR post-url -->"><!-- TMPL_VAR post-title --></a>
+                                </td>
                             </tr>
                             <!-- /TMPL_LOOP -->
                         </tbody>
                     </table>
-                    <!-- TMPL_INCLUDE 'index-pager.html' -->
+                    <!-- TMPL_INCLUDE 'pagination.html' -->
                 </div>
                 <div class="blog-sidebar col-sm-3">
                     <div class="sidebar-module">

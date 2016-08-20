@@ -39,7 +39,8 @@
     (setf posts
           (mapcar #'(lambda (post)
                       (list :post-title (getf post :title)
-                            :post-url (make-post-url (getf post :post_id))))
+                            :post-url (make-post-url (getf post :post_id))
+                            :post-write-at (com.liutos.cl-github-page.post:make-post-write-at post)))
                   post-list))
     (setf pages
           (make-pages-data

@@ -45,6 +45,13 @@
             (format nil "~A 最后更新于~A" meta (universal-to-string update-at))))
     meta))
 
+(defun make-post-write-at (post)
+  (let* ((write-at (getf post :write_at))
+         (timestamp (local-time:universal-to-timestamp write-at)))
+    (local-time:format-timestring
+     nil timestamp
+     :format '(:year "-" :month "-" :day))))
+
 (defun modify-post (post-id
                     source
                     title
