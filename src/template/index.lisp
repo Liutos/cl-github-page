@@ -42,6 +42,7 @@
                            blog-title
                            categories
                            post-body
+                           post-id
                            post-meta
                            post-title
                            &key
@@ -52,6 +53,7 @@
                       :blog-title blog-title
                       :categories categories
                       :post-body post-body
+                      :post-id post-id
                       :post-meta post-meta
                       :post-title post-title)))
     (fill-template-and-print destination template values)))

@@ -38,12 +38,14 @@
           (categories '())
           (destination (make-post-path post-id))
           (post-body (getf post :body))
+          (post-id (getf post :post_id))
           (post-meta (com.liutos.cl-github-page.post:make-post-meta post))
           (post-title (getf post :title)))
       (com.liutos.cl-github-page.template:fill-post-template blog-description
                                                              blog-title
                                                              categories
                                                              post-body
+                                                             post-id
                                                              post-meta
                                                              post-title
                                                              :destination destination))))
