@@ -44,9 +44,9 @@
      :format '(:year "-" (:month 2) "-" (:day 2)))))
 
 (defun modify-post (post-id
-                    source
-                    title
                     &key
+                      source
+                      title
                       write-at)
   (when (pathnamep source)
     (if (com.liutos.cl-github-page.file:is-file-exists source)
