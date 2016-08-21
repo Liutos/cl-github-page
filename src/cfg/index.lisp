@@ -1,7 +1,7 @@
 (in-package #:com.liutos.cl-github-page.config)
 
 (defun get-blog-description ()
-  "由<a href=\"https://github.com/Liutos/cl-github-page\">cl-github-page</a>提供技术支持")
+  "乍听之下，不无道理；仔细揣摩，胡说八道(￣ε(#￣)")
 
 (defun get-blog-root ()
   #P"/home/liutos/src/blog2/")
