@@ -41,7 +41,7 @@
          (timestamp (local-time:universal-to-timestamp write-at)))
     (local-time:format-timestring
      nil timestamp
-     :format '(:year "-" :month "-" :day))))
+     :format '(:year "-" (:month 2) "-" (:day 2)))))
 
 (defun modify-post (post-id
                     source
