@@ -23,7 +23,11 @@
   ((:module "src"
             :serial t
             :components
-            ((:module "common"
+            ((:module "config"
+                      :serial t
+                      :components ((:file "package")
+                                   (:file "index")))
+             (:module "misc"
                       :serial t
                       :components ((:file "package")
                                    (:file "index")))
@@ -43,28 +47,11 @@
                       :serial t
                       :components ((:file "package")
                                    (:file "index")))
-             (:module "article"
-                      :serial t
-                      :components ((:file "package")
-                                   (:file "index")))
-             (:module "cfg"
+             (:module "post"
                       :serial t
                       :components ((:file "package")
                                    (:file "index")))
              (:module "page"
                       :serial t
                       :components ((:file "package")
-                                   (:file "index")))
-             (:file "file-comp")
-             (:file "path")
-             (:file "package")
-             (:file "misc")
-             (:file "about-me")
-             (:file "blog")
-             (:file "config")
-             (:file "class")
-             (:file "category")
-             (:file "post")
-             (:file "rss")
-             (:file "index")
-             (:file "cl-github-page")))))
+                                   (:file "index")))))))
