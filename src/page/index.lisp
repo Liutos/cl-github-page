@@ -24,6 +24,13 @@
 
 ;;; EXPORT
 
+(defun write-all-pagination-pages ()
+  (let* ((posts (com.liutos.cl-github-page.storage:get-post-list))
+         (p3 (com.liutos.cl-github-page.config:get-posts-per-page))
+         (total-pages (ceiling (/ (length posts) p3))))
+    (dotimes (i total-pages)
+      (write-pagination-page i))))
+
 (defun write-all-posts ()
   (let ((posts (com.liutos.cl-github-page.storage:get-post-list)))
     (dolist (post posts)
