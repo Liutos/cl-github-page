@@ -3,4 +3,5 @@
   (:export #:get-blog-description
            #:get-blog-root
            #:get-blog-title
+           #:get-database-options
            #:get-posts-per-page))

@@ -126,12 +126,7 @@
     (make-plist-from-rows result-set)))
 
 (defun start ()
-  (connect
-   :database "cl_github_page"
-   :host "127.0.0.1"
-   :password "2617267"
-   :port 3306
-   :user "root")
+  (apply #'connect (com.liutos.cl-github-page.config:get-database-options))
   (query "SET NAMES utf8"))
 
 (defun stop ()
