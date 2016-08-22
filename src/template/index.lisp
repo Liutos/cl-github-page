@@ -42,3 +42,12 @@
   (let ((html-template:*string-modifier* #'identity)
         (template #p"post.html"))
     (fill-template-and-print destination template args)))
+
+(defun fill-rss-template (&rest
+                            args
+                          &key
+                            destination
+                            &allow-other-keys)
+  (let ((html-template:*string-modifier* #'identity)
+        (template #p"rss.xml"))
+    (fill-template-and-print destination template args)))

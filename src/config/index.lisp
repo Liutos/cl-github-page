@@ -9,12 +9,18 @@
 (defun get-blog-title ()
   "Liutos的博客")
 
+(defun get-blog-site ()
+  "http://liutos.github.io")
+
 (defun get-database-options ()
   (list :database "cl_github_page"
         :host "127.0.0.1"
         :password "2617267"
         :port 3306
         :user "root"))
+
+(defun get-nposts-in-rss ()
+  2)
 
 (defun get-posts-per-page ()
   14)

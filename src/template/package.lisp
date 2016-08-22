@@ -2,4 +2,5 @@
   (:use :cl)
   (:export #:fill-index-template
            #:fill-page-template
-           #:fill-post-template))
+           #:fill-post-template
+           #:fill-rss-template))

@@ -16,11 +16,19 @@
                     :page-number (1+ i))
               pages)))))
 
+(defun make-post-link (post-id)
+  (concatenate 'string
+               (com.liutos.cl-github-page.config:get-blog-site)
+               (make-post-url post-id)))
+
 (defun make-post-path (post-id)
   (merge-pathnames (format nil "posts/~D.html" post-id) (com.liutos.cl-github-page.config:get-blog-root)))
 
 (defun make-post-url (post-id)
   (format nil "/posts/~D.html" post-id))
+
+(defun make-rss-path ()
+  (merge-pathnames "rss.xml" (com.liutos.cl-github-page.config:get-blog-root)))
 
 ;;; EXPORT
 
@@ -96,3 +104,20 @@
        :destination destination)
       (com.liutos.cl-github-page.storage:update-post post-id
                                                      :build-at (com.liutos.cl-github-page.misc:make-datetime-of-now)))))
+
+(defun write-rss-page (&optional
+                         (nposts (com.liutos.cl-github-page.config:get-nposts-in-rss)))
+  (let* ((destination (make-rss-path))
+         (post-list (com.liutos.cl-github-page.storage:get-post-list))
+         (posts (mapcar #'(lambda (post)
+                            (list :post-body (getf post :body)
+                                  :post-title (getf post :title)
+                                  :post-url (make-post-link (getf post :post_id))))
+                        post-list)))
+    (setf posts (subseq posts 0 (min (length posts) nposts)))
+    (com.liutos.cl-github-page.template:fill-rss-template
+     :blog-description (com.liutos.cl-github-page.config:get-blog-description)
+     :blog-site (com.liutos.cl-github-page.config:get-blog-site)
+     :blog-title (com.liutos.cl-github-page.config:get-blog-title)
+     :destination destination
+     :posts posts)))

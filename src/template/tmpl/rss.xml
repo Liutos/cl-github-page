@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title><!-- TMPL_VAR blog-title --></title>
+    <link><!-- TMPL_VAR blog-site --></link>
+    <description><!-- TMPL_VAR blog-description --></description>
+    <!-- TMPL_LOOP posts -->
+    <item>
+      <title><!-- TMPL_VAR post-title --></title>
+      <link><!-- TMPL_VAR post-url --></link>
+      <description><!-- TMPL_VAR post-body --></description>
+    </item>
+    <!-- /TMPL_LOOP -->
+  </channel>
+</rss>
