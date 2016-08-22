@@ -48,6 +48,5 @@
                           &key
                             destination
                             &allow-other-keys)
-  (let ((html-template:*string-modifier* #'identity)
-        (template #p"rss.xml"))
+  (let ((template #p"rss.xml"))
     (fill-template-and-print destination template args)))
