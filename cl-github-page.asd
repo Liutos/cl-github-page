@@ -18,7 +18,8 @@
                #:flexi-streams
                #:html-template
                #:local-time
-               #:osicat)
+               #:osicat
+               #:py-configparser)
   :components
   ((:module "src"
             :serial t

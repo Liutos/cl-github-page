@@ -1,26 +1,35 @@
 (in-package #:com.liutos.cl-github-page.config)
 
+(defparameter *config* (py-configparser:make-config))
+
+;;; EXPORT
+
 (defun get-blog-description ()
-  "乍听之下，不无道理；仔细揣摩，胡说八道(￣ε(#￣)")
+  (py-configparser:get-option *config* "blog" "description"))
 
 (defun get-blog-root ()
-  #P"/home/liutos/src/blog/")
+  (pathname (py-configparser:get-option *config* "blog" "root")))
 
 (defun get-blog-title ()
-  "Liutos的博客")
+  (py-configparser:get-option *config* "blog" "title"))
 
 (defun get-blog-site ()
-  "http://liutos.github.io")
+  (py-configparser:get-option *config* "blog" "site"))
 
 (defun get-database-options ()
-  (list :database "cl_github_page"
-        :host "127.0.0.1"
-        :password "2617267"
-        :port 3306
-        :user "root"))
+  (list :database (py-configparser:get-option *config* "mysql" "database")
+        :host (py-configparser:get-option *config* "mysql" "host")
+        :password (py-configparser:get-option *config* "mysql" "password")
+        :port (parse-integer (py-configparser:get-option *config* "mysql" "port"))
+        :user (py-configparser:get-option *config* "mysql" "user")))
 
 (defun get-nposts-in-rss ()
-  2)
+  (parse-integer (py-configparser:get-option *config* "rss" "count")))
 
 (defun get-posts-per-page ()
-  14)
+  (parse-integer (py-configparser:get-option *config* "post" "p3")))
+
+(defun init (&optional path)
+  (unless path
+    (setf path (merge-pathnames ".blog.ini" (user-homedir-pathname))))
+  (py-configparser:read-files *config* (list path)))
