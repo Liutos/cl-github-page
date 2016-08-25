@@ -1,5 +1,17 @@
 (in-package #:com.liutos.cl-github-page.post)
 
+(defun get-post-author (source)
+  (declare (optimize (speed 0)))
+  (if (pathnamep source)
+      (progn
+        #+sbcl
+        (let* ((stat (sb-posix:stat source))
+               (uid (sb-posix:stat-uid stat)))
+          (cdr (assoc :name (osicat:user-info uid))))
+        #-sbcl
+        (osicat:environment-variable "USER"))
+      (osicat:environment-variable "USER")))
+
 (defun universal-to-string (universal)
   (let ((timestamp (local-time:universal-to-timestamp universal)))
     (local-time:format-timestring
@@ -10,9 +22,11 @@
 
 (defun add-post (source
                  &key
-                   (author (osicat:environment-variable "USER"))
+                   author
                    title
                    write-at)
+  (unless author
+    (setf author (get-post-author source)))
   (when (and (pathnamep source) (null title))
     (setf title (com.liutos.cl-github-page.file:get-basename source)))
   (when (pathnamep source)
