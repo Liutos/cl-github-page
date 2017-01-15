@@ -69,16 +69,19 @@
 (defun create-post (body is-active source title
                     &key
                       author
+                      post-id
                       (write-at (make-datetime-of-now)))
-  (insert-one-row `(("author" . ,author)
-                    ("body" . ,body)
-                    ("create_at" . ,(make-datetime-of-now))
-                    ("is_active" . ,is-active)
-                    ("source" . ,source)
-                    ("title" . ,title)
-                    ("update_at" . ,(make-datetime-of-now))
-                    ("write_at" . ,write-at))
-                  "post"))
+  (let ((alist `(("author" . ,author)
+                 ("body" . ,body)
+                 ("create_at" . ,(make-datetime-of-now))
+                 ("is_active" . ,is-active)
+                 ("source" . ,source)
+                 ("title" . ,title)
+                 ("update_at" . ,(make-datetime-of-now))
+                 ("write_at" . ,write-at))))
+    (when post-id
+      (push (cons "post_id" post-id) alist))
+    (insert-one-row alist "post")))
 
 (defun create-tag (name)
   (insert-one-row `(("name" . ,name)) "tag"))

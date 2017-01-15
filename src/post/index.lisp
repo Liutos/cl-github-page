@@ -23,6 +23,7 @@
 (defun add-post (source
                  &key
                    author
+                   post-id
                    title
                    write-at)
   (unless author
@@ -43,6 +44,7 @@
                                                    source
                                                    title
                                                    :author author
+                                                   :post-id post-id
                                                    :write-at write-at)))
 
 (defun delete-post (post-id)
