@@ -70,7 +70,7 @@
                     &key
                       author
                       post-id
-                      (write-at (make-datetime-of-now)))
+                      write-at)
   (let ((alist `(("author" . ,author)
                  ("body" . ,body)
                  ("create_at" . ,(make-datetime-of-now))
@@ -78,7 +78,7 @@
                  ("source" . ,source)
                  ("title" . ,title)
                  ("update_at" . ,(make-datetime-of-now))
-                 ("write_at" . ,write-at))))
+                 ("write_at" . ,(or write-at (make-datetime-of-now))))))
     (when post-id
       (push (cons "post_id" post-id) alist))
     (insert-one-row alist "post")))
