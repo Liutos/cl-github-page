@@ -32,6 +32,33 @@ Please ensure the blog directory contains the following sub-directories and file
 
 Write a new article in src/ directory, for example, with name foobar.text, whose suffix must be `.text'. Invoke the function `CL-GITHUB-PAGE:MAIN', then a new HTML file named `foobar.html' would be generated and placed in directory posts/default. Now, just add, commit and push the reposity to GitHub.
 
+## Usage
+
+Read and initialize configurations
+
+```lisp
+(com.liutos.cl-github-page.config:init)
+```
+
+Connect to database
+
+```lisp
+(com.liutos.cl-github-page.storage:start)
+```
+
+Read and add the new post
+
+```lisp
+(com.liutos.cl-github-page.post:add-post #P"/path/to/post.text")
+```
+
+Finally, update the pagination and post pages
+
+```lisp
+(com.liutos.cl-github-page.page:write-all-pagination-pages)
+(com.liutos.cl-github-page.page:write-all-posts)
+```
+
 ## Author
 
 Liutos(<mat.liutos@gmail.com>)
