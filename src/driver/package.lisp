@@ -2,4 +2,5 @@
   (:use #:cl)
   (:export #:add-post
            #:init
-           #:modify-post))
+           #:modify-post
+           #:write-post-page))

@@ -3,6 +3,7 @@
 (defvar *has-init-p* nil)
 
 (defun add-post (&rest args)
+  (init)
   (apply #'com.liutos.cl-github-page.post:add-post args))
 
 (defun init ()
@@ -13,4 +14,9 @@
     (setf *has-init-p* t)))
 
 (defun modify-post (&rest args)
+  (init)
   (apply #'com.liutos.cl-github-page.post:modify-post args))
+
+(defun write-post-page (&rest args)
+  (init)
+  (apply #'com.liutos.cl-github-page.page:write-post-page args))
