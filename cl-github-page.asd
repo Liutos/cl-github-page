@@ -55,4 +55,8 @@
              (:module "page"
                       :serial t
                       :components ((:file "package")
+                                   (:file "index")))
+             (:module "driver"
+                      :serial t
+                      :components ((:file "package")
                                    (:file "index")))))))
