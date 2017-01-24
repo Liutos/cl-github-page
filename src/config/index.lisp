@@ -29,6 +29,11 @@
 (defun get-posts-per-page ()
   (parse-integer (py-configparser:get-option *config* "post" "p3")))
 
+(defun get-template-root ()
+  (or (py-configparser:get-option *config* "template" "root")
+      (merge-pathnames "src/template/tmpl/"
+                       (asdf:system-source-directory 'cl-github-page))))
+
 (defun init (&optional path)
   (unless path
     (setf path (merge-pathnames ".blog.ini" (user-homedir-pathname))))

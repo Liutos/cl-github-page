@@ -7,4 +7,5 @@
            #:get-database-options
            #:get-nposts-in-rss
            #:get-posts-per-page
+           #:get-template-root
            #:init))
