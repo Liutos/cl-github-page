@@ -45,7 +45,8 @@
                                                    title
                                                    :author author
                                                    :post-id post-id
-                                                   :write-at write-at)))
+                                                   :write-at write-at)
+    (com.liutos.cl-github-page.storage:find-max-post-id)))
 
 (defun delete-post (post-id)
   (unless (com.liutos.cl-github-page.storage:find-post post-id)

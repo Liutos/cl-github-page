@@ -95,6 +95,12 @@
          (result-set (query query)))
     (car (make-plist-from-rows result-set))))
 
+(defun find-max-post-id ()
+  "Return the largest post's id found in database."
+  (let ((query "SELECT MAX(`post_id`) AS `post_id` FROM `post`"))
+    (let ((row (car (make-plist-from-rows (query query)))))
+      (getf row :post_id))))
+
 (defun find-next-post (post-id)
   (let* ((query (format nil "SELECT * FROM `post` WHERE `post_id` > ~D ORDER BY `post_id` ASC LIMIT 1" post-id))
          (result-set (query query)))
