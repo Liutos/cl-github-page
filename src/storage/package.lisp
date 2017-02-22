@@ -12,6 +12,7 @@
            #:create-tag
            #:delete-post
            #:find-category-by-name
+           #:find-category-post-binding
            #:find-max-post-id
            #:find-next-post
            #:find-post

@@ -95,6 +95,15 @@
          (result-set (query query)))
     (car (make-plist-from-rows result-set))))
 
+(defun find-category-post-binding (category-id post-id)
+  "查询分类与文章的绑定"
+  (check-type category-id integer)
+  (check-type post-id integer)
+  (let* ((query (format nil "SELECT * FROM `category_post` WHERE `category_id` = ~D AND `post_id` = ~D"
+                        category-id post-id))
+         (result-set (query query)))
+    (car (make-plist-from-rows result-set))))
+
 (defun find-max-post-id ()
   "Return the largest post's id found in database."
   (let ((query "SELECT MAX(`post_id`) AS `post_id` FROM `post`"))
