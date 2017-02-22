@@ -44,6 +44,14 @@
                       :serial t
                       :components ((:file "package")
                                    (:file "index")))
+             (:module "bind"
+                      :serial t
+                      :components ((:file "package")
+                                   (:file "index")))
+             (:module "category"
+                      :serial t
+                      :components ((:file "package")
+                                   (:file "index")))
              (:module "template"
                       :serial t
                       :components ((:file "package")
