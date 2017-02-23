@@ -16,6 +16,7 @@
            #:find-max-post-id
            #:find-next-post
            #:find-post
+           #:find-post-by-category
            #:find-post-by-source
            #:find-prev-post
            #:get-post-list

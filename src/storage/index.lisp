@@ -127,6 +127,12 @@
           (query query))
     (car (make-plist-from-rows result-set))))
 
+(defun find-post-by-category (category-id)
+  "查询绑定到指定分类下的文章"
+  (let* ((query (format nil "SELECT * FROM `post` LEFT JOIN `category_post` ON `post`.`post_id` = `category_post`.`post_id` WHERE `category_post`.`category_id` = ~D" category-id))
+         (result-set (query query)))
+    (make-plist-from-rows result-set)))
+
 (defun find-post-by-source (source)
   (let (query
         result-set)
