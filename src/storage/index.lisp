@@ -4,19 +4,22 @@
   (let (query
         where-part)
     (setf where-part
-          (encode-sql-alist-to-string alist))
+          (encode-sql-alist-to-string alist
+                                      :separator " AND "))
     (setf query
           (format nil "DELETE FROM `~A` WHERE ~A" table where-part))
     (query query)))
 
-(defun encode-sql-alist-to-string (alist)
+(defun encode-sql-alist-to-string (alist
+                                   &key
+                                     (separator ", "))
   (let ((is-empty t))
     (with-output-to-string (sql)
       (dolist (element alist)
         (destructuring-bind (col-name . expr) element
           (when expr
             (when (not is-empty)
-              (write-string ", " sql))
+              (write-string separator sql))
             (let (part)
               (setf part (format nil "`~A` = ~S" col-name expr))
               (write-string part sql)
