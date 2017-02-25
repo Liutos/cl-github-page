@@ -21,6 +21,15 @@
 
 ;;; EXPORT
 
+(defun fill-category-template (&rest
+                                 args
+                               &key
+                                 destination
+                                 &allow-other-keys)
+  (let ((html-template:*string-modifier* #'identity)
+        (template #p"category.html"))
+    (fill-template-and-print destination template args)))
+
 (defun fill-page-template (&rest
                               args
                             &key

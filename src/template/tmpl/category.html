@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <!-- TMPL_INCLUDE 'head.html' -->
+    <body>
+        <!-- TMPL_INCLUDE 'masthead.html' -->
+        <div class="container" style="margin-top: 40px;">
+            <!-- TMPL_INCLUDE 'blog-header.html' -->
+            <div class="row">
+                <div class="blog-main col-sm-8">
+                    <table class="blog-post-list table">
+                        <tbody>
+                            <!-- TMPL_LOOP posts -->
+                            <tr>
+                                <td>
+                                    <span class="blog-post-write-at"><!-- TMPL_VAR post-write-at --></span>
+                                    <a href="<!-- TMPL_VAR post-url -->"><!-- TMPL_VAR post-title --></a>
+                                </td>
+                            </tr>
+                            <!-- /TMPL_LOOP -->
+                        </tbody>
+                    </table>
+                    <!-- TMPL_INCLUDE 'pagination.html' -->
+                </div>
+                <div class="blog-sidebar col-sm-3">
+                    <div class="sidebar-module">
+                        <h4>分类</h4>
+                        <ol class="list-unstyled">
+                            <!-- TMPL_LOOP categories -->
+                            <li><!-- TMPL_VAR name --></li>
+                            <!-- /TMPL_LOOP -->
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="blog-footer">
+        </footer>
+        <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </body>
+</html>
