@@ -93,6 +93,13 @@
   (delete-by-alist `(("post_id" . ,post-id))
                    "post"))
 
+(defun find-category (category-id)
+  "查找给定的分类"
+  (check-type category-id integer)
+  (let* ((query (format nil "SELECT * FROM `category` WHERE `category_id` = ~D" category-id))
+         (result-set (query query)))
+    (car (make-plist-from-rows result-set))))
+
 (defun find-category-by-name (name)
   (let* ((query (format nil "SELECT * FROM `category` WHERE `name` = ~S" name))
          (result-set (query query)))
