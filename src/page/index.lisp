@@ -1,5 +1,11 @@
 (in-package #:com.liutos.cl-github-page.page)
 
+(defun make-category-path (category-id)
+  "返回指定分类的页面地址"
+  (check-type category-id integer)
+  (merge-pathnames (format nil "categories/~D.html" category-id)
+                   (com.liutos.cl-github-page.config:get-blog-root)))
+
 (defun make-pagination-path (page-number)
   (let ((path (if (zerop page-number)
                   "index.html"
@@ -43,6 +49,28 @@
   (let ((posts (com.liutos.cl-github-page.storage:get-post-list)))
     (dolist (post posts)
       (write-post-page (getf post :post_id)))))
+
+(defun write-category-page (category-id)
+  "生成指定分类的文章列表页"
+  (let ((category (com.liutos.cl-github-page.storage:find-category category-id)))
+    (unless category
+      (error "~D: 分类不存在" category-id))
+    (let* ((blog-description (com.liutos.cl-github-page.config:get-blog-description))
+           (blog-title (com.liutos.cl-github-page.config:get-blog-title))
+           (categories '())
+           (destination (make-category-path category-id))
+           (post-list (com.liutos.cl-github-page.storage:find-post-by-category category-id))
+           (posts (mapcar #'(lambda (post)
+                              (list :post-title (getf post :title)
+                                    :post-url (make-post-url (getf post :post_id))
+                                    :post-write-at (com.liutos.cl-github-page.post:make-post-write-at post)))
+                          post-list)))
+      (com.liutos.cl-github-page.template:fill-category-template
+       :blog-description blog-description
+       :blog-title blog-title
+       :categories categories
+       :posts posts
+       :destination destination))))
 
 (defun write-index-page ()
   (write-pagination-page 0))
