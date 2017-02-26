@@ -38,6 +38,12 @@
 
 ;;; EXPORT
 
+(defun write-all-category-pages ()
+  "生成所有分类的文章列表页"
+  (let ((categories (com.liutos.cl-github-page.storage:get-category-list)))
+    (dolist (category categories)
+      (write-category-page (getf category :category_id)))))
+
 (defun write-all-pagination-pages ()
   (let* ((posts (com.liutos.cl-github-page.storage:get-post-list))
          (p3 (com.liutos.cl-github-page.config:get-posts-per-page))
