@@ -20,6 +20,7 @@
            #:find-post-by-category
            #:find-post-by-source
            #:find-prev-post
+           #:get-category-list
            #:get-post-list
            #:start
            #:stop

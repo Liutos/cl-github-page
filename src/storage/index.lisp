@@ -154,6 +154,12 @@
          (result-set (query query)))
     (car (make-plist-from-rows result-set))))
 
+(defun get-category-list ()
+  "获取所有的分类"
+  (let* ((query (format nil "SELECT * FROM `category`"))
+         (result-set (query query)))
+    (make-plist-from-rows result-set)))
+
 (defun get-post-list ()
   (let* ((query (format nil "SELECT * FROM `post` ORDER BY `write_at` DESC"))
          (result-set (query query)))
