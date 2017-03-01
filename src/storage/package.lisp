@@ -8,6 +8,7 @@
   (:export #:bind-category-post
            #:bind-post-tag
            #:create-category
+           #:create-friend
            #:create-post
            #:create-tag
            #:delete-post

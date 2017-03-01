@@ -69,6 +69,14 @@
 (defun create-category (name)
   (insert-one-row `(("name" . ,name)) "category"))
 
+(defun create-friend (title url)
+  "创建一条友情链接"
+  (check-type title string)
+  (check-type url string)
+  (insert-one-row `(("title" . ,title)
+                    ("url" . ,url))
+                  "friend"))
+
 (defun create-post (body is-active source title
                     &key
                       author
