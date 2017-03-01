@@ -22,6 +22,7 @@
            #:find-post-by-source
            #:find-prev-post
            #:get-category-list
+           #:get-friend-list
            #:get-post-list
            #:start
            #:stop

@@ -168,6 +168,12 @@
          (result-set (query query)))
     (make-plist-from-rows result-set)))
 
+(defun get-friend-list ()
+  "获取所有的友情链接"
+  (let* ((query (format nil "SELECT * FROM `friend`"))
+         (result-set (query query)))
+    (make-plist-from-rows result-set)))
+
 (defun get-post-list ()
   (let* ((query (format nil "SELECT * FROM `post` ORDER BY `write_at` DESC"))
          (result-set (query query)))
