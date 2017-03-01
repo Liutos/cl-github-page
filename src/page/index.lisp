@@ -89,6 +89,7 @@
                                       :name (getf category :name)))
                             (com.liutos.cl-github-page.storage:get-category-list)))
         (destination (make-pagination-path page-number))
+        (friends (com.liutos.cl-github-page.storage:get-friend-list))
         (post-list (com.liutos.cl-github-page.storage:get-post-list))
         (p3 (com.liutos.cl-github-page.config:get-posts-per-page))
         pages
@@ -110,6 +111,7 @@
      :blog-description blog-description
      :blog-title blog-title
      :categories categories
+     :friends friends
      :pages pages
      :posts posts
      :destination destination)))
