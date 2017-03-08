@@ -23,9 +23,11 @@
 (defun add-post (source
                  &key
                    author
+                   category-id
                    post-id
                    title
                    write-at)
+  (check-type category-id (or fixnum null))
   (unless author
     (setf author (get-post-author source)))
   (when (and (pathnamep source) (null title))
@@ -46,7 +48,10 @@
                                                    :author author
                                                    :post-id post-id
                                                    :write-at write-at)
-    (com.liutos.cl-github-page.storage:find-max-post-id)))
+    (let ((post-id (com.liutos.cl-github-page.storage:find-max-post-id)))
+      (when category-id
+        (com.liutos.cl-github-page.bind:bind-category-post category-id post-id))
+      post-id)))
 
 (defun delete-post (post-id)
   (unless (com.liutos.cl-github-page.storage:find-post post-id)
