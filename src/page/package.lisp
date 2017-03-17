@@ -6,4 +6,5 @@
            #:write-category-page
            #:write-index-page
            #:write-pagination-page
-           #:write-post-page))
+           #:write-post-page
+           #:write-rss-page))

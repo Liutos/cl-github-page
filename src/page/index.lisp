@@ -54,7 +54,8 @@
 (defun write-all-posts ()
   (let ((posts (com.liutos.cl-github-page.storage:get-post-list)))
     (dolist (post posts)
-      (write-post-page (getf post :post_id)))))
+      (write-post-page (getf post :post_id))))
+  (write-rss-page))
 
 (defun write-category-page (category-id)
   "生成指定分类的文章列表页"
