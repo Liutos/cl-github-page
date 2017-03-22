@@ -17,6 +17,18 @@
   (init)
   (apply #'com.liutos.cl-github-page.post:modify-post args))
 
+(defun write-all-category-pages (&rest args)
+  (init)
+  (apply #'com.liutos.cl-github-page.page:write-all-category-pages args))
+
+(defun write-all-pagination-pages (&rest args)
+  (init)
+  (apply #'com.liutos.cl-github-page.page:write-all-pagination-pages args))
+
+(defun write-all-posts (&rest args)
+  (init)
+  (apply #'com.liutos.cl-github-page.page:write-all-posts args))
+
 (defun write-post-page (&rest args)
   (init)
   (apply #'com.liutos.cl-github-page.page:write-post-page args))
