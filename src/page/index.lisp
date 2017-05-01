@@ -138,6 +138,7 @@
        :post-author (getf post :author)
        :post-body post-body
        :post-id post-id
+       :post-url (make-post-url post-id)
        :post-write-at post-write-at
        :post-title post-title
        :prev-post-id (getf prev-post :post_id)
