@@ -23,6 +23,9 @@
         :port (parse-integer (py-configparser:get-option *config* "mysql" "port"))
         :user (py-configparser:get-option *config* "mysql" "user")))
 
+(defun get-default-category ()
+  (py-configparser:get-option *config* "post" "category"))
+
 (defun get-nposts-in-rss ()
   (parse-integer (py-configparser:get-option *config* "rss" "count")))
 

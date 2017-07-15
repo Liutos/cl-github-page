@@ -49,6 +49,11 @@
                                                    :post-id post-id
                                                    :write-at write-at)
     (let ((post-id (com.liutos.cl-github-page.storage:find-max-post-id)))
+      (let ((default-category (com.liutos.cl-github-page.config:get-default-category)))
+        (when (and category-id default-category)
+          (setf category-id
+                (getf (com.liutos.cl-github-page.category:find-by-name default-category)
+                      :category_id))))
       (when category-id
         (com.liutos.cl-github-page.bind:bind-category-post category-id post-id))
       post-id)))
